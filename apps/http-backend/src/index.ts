@@ -1,5 +1,9 @@
+require('dotenv').config()
+
 import express from "express";
 import jwt from "jsonwebtoken"
+import { JWT_SECRET } from "./config";
+import auth from "./middleware";
 
 const app = express()
 const PORT = 3001
@@ -11,10 +15,14 @@ app.post("/signup", (req, res) => {
 })
 
 app.post("/signin", (req, res) => {
-    res.json({ msg: "signin" })
+    const userId = 1;
+    const token = jwt.sign({
+        userId
+    },JWT_SECRET)
+    res.json({ token })
 })
 
-app.post("/room", (req, res) => {
+app.post("/room",auth, (req, res) => {
     res.json({ msg: "create-sign" })
 })
 

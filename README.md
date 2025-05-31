@@ -12,6 +12,5 @@
 10. Create an express server,add signup,signin,create-room.
 11. Gate ws server using the jwt.
 12.  Add a commom pkg where we add the zod and jwt_secret.
-    *working*
-13.  Create a db pkg.
-14.  Using the db pkg in the http layer.
+13.  Create a db pkg.(**working**)
+14.  Using the db pkg in the http layer.(**working**)

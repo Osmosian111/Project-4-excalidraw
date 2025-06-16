@@ -22,12 +22,13 @@
 9. create express and ws server
 10. add signup signin and room route
 11. Create backend-common in pkgs folder for config.ts and add .env file
-11. create middleware for signin check and gate room route
-12. gate ws server with jwt
-13. create zod endpoint in package: common folder
-14. add zod in http-server
-15. create db in pkg folder
-16. create schema than give db url than migrate than generate
-17. export prisma client
-18. complete http routes
-19. 
+12. create middleware for signin check and gate room route
+13. gate ws server with jwt
+14. create zod endpoint in package: common folder
+15. add zod in http-server
+16. create db in pkg folder
+17. create schema than give db url than migrate than generate
+18. export prisma client
+19. complete http routes
+20. create different function to check jwt token is correct or not
+21. 

@@ -1,9 +1,27 @@
 require("dotenv").config()
 
-import { WebSocketServer } from 'ws';
+import { WebSocket, WebSocketServer } from 'ws';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { JWT_SECRET } from '@repo/backend-common/config';
+
 const wss = new WebSocketServer({ port: 8080 });
+
+interface User {
+    ws: WebSocket,
+    rooms: string[],
+    userId: string
+}
+
+const users: User[] = []
+
+function checkUser(token:string):boolean{
+    const decode = jwt.verify(token, JWT_SECRET);
+
+    if (typeof decode == "string") return false
+
+    if (!decode || !decode.userId) return false
+    return true
+}
 
 wss.on('connection', function connection(ws, request) {
     const url = request.url;
@@ -12,14 +30,8 @@ wss.on('connection', function connection(ws, request) {
     }
     const queryPrams = new URLSearchParams(url.split('?')[1]);
     const token = queryPrams.get('token') ?? " ";
-    const decode = jwt.verify(token, JWT_SECRET);
-
-    if (typeof decode == "string") return
-
-    if (!decode || !decode.userId) {
-        ws.close()
-        return
-    }
+    
+    checkUser(token)
 
     ws.on('message', function message(data) {
         ws.send('pong');

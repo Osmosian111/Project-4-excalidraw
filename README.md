@@ -30,5 +30,7 @@
 17. create schema than give db url than migrate than generate
 18. export prisma client
 19. complete http routes
-20. create different function to check jwt token is correct or not
-21. 
+20. create different function to get userId form jwt token
+21. create array to store new ws user
+22. In on message ws create join_room,leave_room and chat endpoint
+23. 

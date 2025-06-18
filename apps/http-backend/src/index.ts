@@ -83,22 +83,40 @@ app.post("/room", auth, async (req: ResqustWithUser, res) => {
                 }
             })
             res.json({
-                msg:"Room created"
+                msg: "Room created"
             })
         } catch (error) {
             res.json({
-                msg:"Room already exist"
+                msg: "Room already exist"
             })
             return
         }
-    }else{
+    } else {
         res.json({
-            msg:"Something went wrong"
+            msg: "Something went wrong"
         })
         return
     }
 })
 
+app.get("/chats/:roomId", async (req, res) => {
+    const roomId = Number(req.params.roomId);
+
+    const message = await prismaClient.chat.findMany({
+        where: {
+            roomId
+        },
+        orderBy: {
+            id: "desc"
+        },
+        take: 50
+    })
+
+    res.json({
+        msg:message
+    })
+})
+ 
 interface ResqustWithUser extends Request {
     userId?: string;
 }

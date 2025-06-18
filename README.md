@@ -8,29 +8,4 @@
 6. zod
 7. dotenv
 8. prisma
-
-**Step to build**
-
-1. Initailise the turbo repo
-2. delete docs app
-3. Add http-server,ws-server.
-4. Add pkg.json in both.
-5. Add tsconfig.json in both.
-6. add extend and rootdir & outdir in tsconfig.json
-7. add build,start and dev script in pkg.json
-8. add turbo.json
-9. create express and ws server
-10. add signup signin and room route
-11. Create backend-common in pkgs folder for config.ts and add .env file
-12. create middleware for signin check and gate room route
-13. gate ws server with jwt
-14. create zod endpoint in package: common folder
-15. add zod in http-server
-16. create db in pkg folder
-17. create schema than give db url than migrate than generate
-18. export prisma client
-19. complete http routes
-20. create different function to get userId form jwt token
-21. create array to store new ws user
-22. In on message ws create join_room,leave_room and chat endpoint
-23. 
+9. 

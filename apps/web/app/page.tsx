@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <div>
-      <input type="text" placeholder="Room id" value={roomId} onChange={(e)=>setRoomId(e.target.value)}/>
+      <input type="text" placeholder="Room Name" value={roomId} onChange={(e)=>setRoomId(e.target.value)}/>
 
       <button onClick={()=>{
         router.push(`/room/${roomId}`)

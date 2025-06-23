@@ -11,30 +11,53 @@ export function ChatRoomClient({
   id: string;
 }) {
   const [chats, setChats] = useState(messages);
+  const [currentMessage, setCurrentMessage] = useState("");
   const { socket, loading } = useSocket();
 
   useEffect(() => {
-    if (socket && loading) {
+    if (socket && !loading) {
       socket.send(
         JSON.stringify({
           type: "join_room",
           roomId: id,
         })
       );
-    }
-    if (socket) {
       socket.onmessage = (event) => {
         const parsedData = JSON.parse(event.data);
-        if(parsedData.type === "chats"){
-            setChats(c=>[...c,{message:parsedData.message}])
+        if (parsedData.type === "chat") {
+          setChats((c) => [{ message: parsedData.message }, ...c]);
         }
       };
     }
   }, [socket, loading, id]);
 
-  return (<div>
-  {messages.map(m=>{
-    return <div key={Math.random()}>{m.message}</div>
-  })}
-  </div>)
+  return (
+    <div>
+      {chats.map((m) => {
+        return <div key={Math.random()}>{m.message}</div>;
+      })}
+      <input
+        type="text"
+        onChange={(e) => {
+          setCurrentMessage(e.target.value);
+        }}
+        value={currentMessage}
+      />
+      <button
+        onClick={() => {
+          socket?.send(
+            JSON.stringify({
+              type: "chat",
+              roomId: id,
+              message: currentMessage,
+            })
+          );
+
+          setCurrentMessage("");
+        }}
+      >
+        Send
+      </button>
+    </div>
+  );
 }
